@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import './App.css';
 import ToDoList from './ToDoList';
+import Button from '@mui/material/Button';
 
 const LOCAL_STORAGE_KEY = 'todoApp.todos'
 
@@ -41,13 +42,15 @@ function App() {
   }
 
   return (    
-    <>
-      <ToDoList todos={todos} toggleTodo={toggleTodo}/>
-      <input ref={todoNameRef} type="text"/>
-      <button onClick={handleAddTodo}>Add ToDo</button>
-      <button onClick={handleClearTodos}>Clear Completed</button>
-      <div>{todos.filter(todo => !todo.complete).length} left to do</div>
-    </>
+    <div className='App'>
+      <header className='App-body'>
+        <ToDoList todos={todos} toggleTodo={toggleTodo}/>
+        <input ref={todoNameRef} type="text"/>
+        <Button variant="contained" onClick={handleAddTodo} color="success">Add To-Do</Button>
+        <Button variant="contained" onClick={handleClearTodos} color="secondary">Clear Completed</Button>
+        <div>{todos.filter(todo => !todo.complete).length} left to do</div>
+      </header>
+    </div>
     
   );
 }
