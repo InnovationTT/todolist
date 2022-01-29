@@ -1,12 +1,12 @@
 import React, { useRef, useState } from 'react';
 import { Card, Form, Button, Alert } from 'react-bootstrap'
-import { useAuth } from './contexts/AuthContext'
+import { useAuth } from '../contexts/AuthContext'
 
 function Signup(props) {
     const emailRef = useRef();
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
-    const { signup } = useAuth();
+    const { signup, currentUser } = useAuth();
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
@@ -33,19 +33,20 @@ function Signup(props) {
         <>
             <Card>
                 <Card.Body>
-                    <h2 className="text-center mb-4" class="text-primary">Sign Up</h2>
+                    <h2 className="text-center text-primary mb-4" >Sign Up</h2>
+                    {currentUser && currentUser.email}
                     {error && <Alert variant="danger">{error}</Alert>}
                     <Form onSubmit={handleSubmit}>
                         <Form.Group id="email">
-                            <Form.Label class="text-secondary">Email</Form.Label>
+                            <Form.Label className="text-secondary">Email</Form.Label>
                             <Form.Control type="email" ref={emailRef} required></Form.Control>
                         </Form.Group>
                         <Form.Group id="password">
-                            <Form.Label class="text-secondary">Password</Form.Label>
+                            <Form.Label className="text-secondary">Password</Form.Label>
                             <Form.Control type="password" ref={passwordRef} required></Form.Control>
                         </Form.Group>
                         <Form.Group id="email">
-                            <Form.Label class="text-secondary">Confirm Password</Form.Label>
+                            <Form.Label className="text-secondary">Confirm Password</Form.Label>
                             <Form.Control type="password" ref={passwordConfirmRef} required></Form.Control>
                         </Form.Group>
                         <Button disabled={loading} className="w-100" type="submit">Sign Up</Button>
