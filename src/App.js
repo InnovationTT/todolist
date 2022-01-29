@@ -2,10 +2,13 @@ import { useState, useRef, useEffect } from 'react';
 import './App.css';
 import ToDoList from './ToDoList';
 import Button from '@mui/material/Button';
+import Signup from './Signup';
+import { Container } from 'react-bootstrap';
+import { AuthProvider } from './contexts/AuthContext'
 
 const LOCAL_STORAGE_KEY = 'todoApp.todos'
 
-function App() {
+export default function App() {
   const [todos, setTodos] = useState([]);
   const todoNameRef = useRef();
 
@@ -44,6 +47,17 @@ function App() {
   return (    
     <div className='App'>
       <header className='App-body'>
+          <AuthProvider>
+          <Container className='d-flex align-items-center justify-content-center' style={{minHeight: "100vh"}}>
+            <div className='w-100' style={{ maxWidth: "400px"}}>
+              <Signup/>
+            </div>
+          </Container>
+          </AuthProvider>
+          
+        
+        
+        
         <ToDoList todos={todos} toggleTodo={toggleTodo}/>
         <input ref={todoNameRef} type="text"/>
         <Button variant="contained" onClick={handleAddTodo} color="success">Add To-Do</Button>
@@ -55,4 +69,4 @@ function App() {
   );
 }
 
-export default App;
+
