@@ -5,8 +5,7 @@ import { Container } from 'react-bootstrap';
 import { AuthProvider } from '../contexts/AuthContext'
 import Dashboard from './Dashboard';
 import Login from './Login';
-
-
+import PrivateRoute from './PrivateRoute';
 
 export default function App() {
   
@@ -20,7 +19,9 @@ export default function App() {
               <Router>
                 <AuthProvider>
                   <Routes>
-                    <Route exact path="/" element={<Dashboard/>}/>
+                    <Route exact path="/" element={<PrivateRoute/>}>
+                      <Route exact path="/" element={<Dashboard/>}/>
+                    </Route>
                     <Route path="/signup" element={<Signup/>}/>
                     <Route path="/login" element={<Login/>}/>
                   </Routes>
